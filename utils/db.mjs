@@ -1,10 +1,14 @@
-// Create PostgreSQL Connection Pool here !
+import "dotenv/config";
 import * as pg from "pg";
+
 const { Pool } = pg.default;
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL is not defined in the .env file.");
+}
+
 const connectionPool = new Pool({
-  connectionString:
-    "postgresql://postgres:.Whitememo95@localhost:5432/QuoraMock",
+  connectionString: process.env.DATABASE_URL,
 });
 
 export default connectionPool;
